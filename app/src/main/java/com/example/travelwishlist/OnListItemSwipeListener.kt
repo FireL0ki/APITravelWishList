@@ -26,7 +26,9 @@ class OnListItemSwipeListener(private val onDataChangedListener: OnDataChangedLi
 
     // swipe left and right
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        TODO("Not yet implemented")
+        if (direction == ItemTouchHelper.RIGHT) {
+            onDataChangedListener.onListItemDeleted(viewHolder.adapterPosition)
+        }
     }
 
 

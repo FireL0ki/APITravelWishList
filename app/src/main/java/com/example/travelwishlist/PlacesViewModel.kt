@@ -47,4 +47,8 @@ class PlacesViewModel: ViewModel() {
         Log.d(TAG, places.toString())
     }
 
+    fun deletePlace(position: Int): Place {
+        return places.removeAt(position)
+    }
+
 }

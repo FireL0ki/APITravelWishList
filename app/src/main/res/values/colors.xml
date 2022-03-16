@@ -9,5 +9,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="list_item_background">#BA4D5D</color>
+    <color name="red">#FF0000</color>
+    <color name="dark_grey">#222211</color>
 
 </resources>

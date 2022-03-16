@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity(), OnListItemClickedListener, OnDataChangedListener {
 
@@ -92,11 +93,23 @@ class MainActivity : AppCompatActivity(), OnListItemClickedListener, OnDataChang
     }
 
     override fun onListItemMoved(from: Int, to: Int) {
-        TODO("Not yet implemented")
+        placesViewModel.movePlace(from, to)
+        placesRecyclerAdapter.notifyItemMoved(from, to)
     }
 
     override fun onListItemDeleted(position: Int) {
-        TODO("Not yet implemented")
+        val deletedPlace = placesViewModel.deletePlace(position)
+        placesRecyclerAdapter.notifyItemRemoved(position)
+
+        // Snackbar is a more updated version of a toast, may also allow an action to take place
+        Snackbar.make(findViewById(R.id.wishlist_container), "${deletedPlace.name} deleted", Snackbar.LENGTH_LONG) // or you can put a number for duration in milliseconds
+            .setActionTextColor(resources.getColor(R.color.red))
+            .setBackgroundTint(resources.getColor(R.color.dark_grey))
+            .setAction(getString(R.string.undo)) {  // displays an "UNDO" button
+                placesViewModel.addNewPlace(deletedPlace, position)
+                placesRecyclerAdapter.notifyItemInserted(position)
+            }
+            .show()
     }
 
 }
