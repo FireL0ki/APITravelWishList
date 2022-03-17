@@ -27,9 +27,12 @@ class PlaceRecyclerAdapter(private val places: List<Place>,
         inner class ViewHolder(private val view: View): RecyclerView.ViewHolder(view) {
             fun bind(place: Place) {
                 val placeNameTextView: TextView = view.findViewById(R.id.place_name)
-                // another way to put type: (it's what the <> come from in findViewById
-                // val placeNameTextView = view.findViewById<TextView>(R.id.place_name)
                 placeNameTextView.text = place.name
+
+                // using <> to enter type (same as above, written differently)
+                // adding reason to place, to show up in recycler view
+                val placeReasonTextView = view.findViewById<TextView>(R.id.reason_added)
+                placeReasonTextView.text = place.reason
 
                 // set up dateCreated text view, finding it in the view and setting text to the value
                 val dateCreatedOnTextView: TextView = view.findViewById(R.id.date_place_added)

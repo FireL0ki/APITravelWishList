@@ -14,10 +14,12 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import java.util.*
 
 class MainActivity : AppCompatActivity(), OnListItemClickedListener, OnDataChangedListener {
 
-    private lateinit var newPlaceEditText: EditText
+    private lateinit var newNameEditText: EditText
+    private lateinit var newReasonEditText: EditText
     private lateinit var addNewPlaceButton: Button
     private lateinit var placeListRecyclerView: RecyclerView
 
@@ -35,7 +37,8 @@ class MainActivity : AppCompatActivity(), OnListItemClickedListener, OnDataChang
 
         placeListRecyclerView = findViewById(R.id.place_list)
         addNewPlaceButton = findViewById(R.id.add_new_place_button)
-        newPlaceEditText = findViewById(R.id.new_place_name)
+        newNameEditText = findViewById(R.id.new_place_name)
+        newReasonEditText = findViewById(R.id.enter_reason)
 
         val places = placesViewModel.getPlaces() // list of place objects
 
@@ -44,8 +47,8 @@ class MainActivity : AppCompatActivity(), OnListItemClickedListener, OnDataChang
         placeListRecyclerView.layoutManager = LinearLayoutManager(this)
         placeListRecyclerView.adapter = placesRecyclerAdapter
 
-        val itemSwipeListner = OnListItemSwipeListener(this)
-        val ith = ItemTouchHelper(itemSwipeListner)
+        val itemSwipeListener = OnListItemSwipeListener(this)
+        val ith = ItemTouchHelper(itemSwipeListener)
         ith.attachToRecyclerView(placeListRecyclerView)
         // or write it:
         // ItemTouchHelper(listener).attachToRecyclerView(placeListRecyclerView)
@@ -58,11 +61,12 @@ class MainActivity : AppCompatActivity(), OnListItemClickedListener, OnDataChang
 
     private fun addNewPlace() {
         // read data from edit text & add to the list (ask viewModel to add to the list)
-        val name = newPlaceEditText.text.toString().trim()
+        val name = newNameEditText.text.toString().trim()
+        val reason = newReasonEditText.text.toString().trim()
         if (name.isEmpty()) {
             Toast.makeText(this, "Enter a place name", Toast.LENGTH_SHORT).show()
         } else {
-            val newPlace = Place(name)
+            val newPlace = Place(name, reason)
             val positionAdded = placesViewModel.addNewPlace(newPlace)
             if (positionAdded == -1) {
                 Toast.makeText(this, "You already added that place", Toast.LENGTH_SHORT).show()
@@ -75,7 +79,7 @@ class MainActivity : AppCompatActivity(), OnListItemClickedListener, OnDataChang
     }
 
     private fun clearForm() {
-        newPlaceEditText.text.clear()
+        newNameEditText.text.clear()
     }
 
     private fun hideKeyboard() {

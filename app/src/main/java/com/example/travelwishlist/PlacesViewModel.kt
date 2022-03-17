@@ -2,13 +2,14 @@ package com.example.travelwishlist
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import java.util.*
 
 
 const val TAG = "PLACES_VIEW_MODEL"
 class PlacesViewModel: ViewModel() {
 
-    private val places = mutableListOf<Place>(Place("Loch Ness"),
-        Place("New York, New York"))
+    private val places = mutableListOf<Place>(Place("Loch Ness", "I'm a pluviophile"),
+        Place("New York, New York","I wanna wake up in a city that never sleeps"))
 
     fun getPlaces(): List<Place> {
         return places // smart cast

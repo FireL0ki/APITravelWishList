@@ -11,6 +11,7 @@
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:contentDescription="@string/a_scottish_cow_in_the_hills_of_the_highlands"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,13 +25,17 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/medium_spacing"
+        android:layout_marginTop="8dp"
+        android:autofillHints=""
         android:background="@color/white"
         android:ems="10"
         android:hint="@string/where_do_you_want_to_go"
         android:inputType="none|text"
         android:minHeight="48dp"
         android:padding="@dimen/small_spacing"
+        android:textColorHint="#757575"
         app:layout_constraintEnd_toStartOf="@+id/add_new_place_button"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,10 +54,21 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/place_list"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/enter_reason"
+        tools:layout_editor_absoluteX="-1dp" />
+
+    <TextView
+        android:id="@+id/enter_reason"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/medium_spacing"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
+        android:hint="@string/why_do_you_want_to_go_there"
+        android:padding="@dimen/small_spacing"
+        android:textColorHint="#757575"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/new_place_name" />
 

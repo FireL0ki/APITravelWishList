@@ -6,5 +6,8 @@
     <string name="created_on">Created on %1$s</string>
     <string name="place_deleted">%1$s deleted</string>
     <string name="undo">UNDO</string>
+    <string name="a_scottish_cow_in_the_hills_of_the_highlands">a Scottish cow in the hills of the Highlands</string>
+    <string name="why_do_you_want_to_go_there">why do you want to go there?</string>
+    <string name="reason_added">Reason Added</string>
 
 </resources>
