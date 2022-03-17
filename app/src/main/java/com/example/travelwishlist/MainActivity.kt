@@ -102,7 +102,7 @@ class MainActivity : AppCompatActivity(), OnListItemClickedListener, OnDataChang
         placesRecyclerAdapter.notifyItemRemoved(position)
 
         // Snackbar is a more updated version of a toast, may also allow an action to take place
-        Snackbar.make(findViewById(R.id.wishlist_container), "${deletedPlace.name} deleted", Snackbar.LENGTH_LONG) // or you can put a number for duration in milliseconds
+        Snackbar.make(findViewById(R.id.wishlist_container), getString(R.string.place_deleted, deletedPlace.name), 5000)
             .setActionTextColor(resources.getColor(R.color.red))
             .setBackgroundTint(resources.getColor(R.color.dark_grey))
             .setAction(getString(R.string.undo)) {  // displays an "UNDO" button

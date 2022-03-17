@@ -7,5 +7,7 @@
 
     <dimen name="medium_text_size">15sp</dimen>
     <dimen name="large_text_size">20sp</dimen>
+    <dimen name="card_corner_radius">10dp</dimen>
+    <dimen name="care_elevation">30dp</dimen>
 
 </resources>
