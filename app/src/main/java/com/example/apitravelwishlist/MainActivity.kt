@@ -13,8 +13,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.travelwishlist.R
-import java.util.*
+//import com.example.travelwishlist.R
+//import java.util.*
 
 class MainActivity : AppCompatActivity(), OnListItemClickedListener, OnDataChangedListener {
 
@@ -40,10 +40,10 @@ class MainActivity : AppCompatActivity(), OnListItemClickedListener, OnDataChang
         newNameEditText = findViewById(R.id.new_place_name)
         newReasonEditText = findViewById(R.id.enter_reason)
 
-        val places = placesViewModel.getPlaces() // list of place objects
+//        val places = placesViewModel.getPlaces() // list of place objects
 
         // set up and connect the adapter
-        placesRecyclerAdapter = PlaceRecyclerAdapter(places, this)
+        placesRecyclerAdapter = PlaceRecyclerAdapter(listOf(), this)
         placeListRecyclerView.layoutManager = LinearLayoutManager(this)
         placeListRecyclerView.adapter = placesRecyclerAdapter
 
@@ -57,6 +57,11 @@ class MainActivity : AppCompatActivity(), OnListItemClickedListener, OnDataChang
         addNewPlaceButton.setOnClickListener {
             addNewPlace()
         }
+
+        placesViewModel.allPlaces.observe(this) { places ->
+            placesRecyclerAdapter.places = places
+            placesRecyclerAdapter.notifyDataSetChanged()
+        }
     }
 
     private fun addNewPlace() {
@@ -68,13 +73,13 @@ class MainActivity : AppCompatActivity(), OnListItemClickedListener, OnDataChang
         } else {
             val newPlace = Place(name, reason)
             val positionAdded = placesViewModel.addNewPlace(newPlace)
-            if (positionAdded == -1) {
-                Toast.makeText(this, "You already added that place", Toast.LENGTH_SHORT).show()
-            } else {
-                placesRecyclerAdapter.notifyItemInserted(positionAdded)
+//            if (positionAdded == -1) {
+//                Toast.makeText(this, "You already added that place", Toast.LENGTH_SHORT).show()
+//            } else {
+//                placesRecyclerAdapter.notifyItemInserted(positionAdded)
                 clearForm()
                 hideKeyboard()
-            }
+//            }
         }
     }
 
@@ -107,7 +112,7 @@ class MainActivity : AppCompatActivity(), OnListItemClickedListener, OnDataChang
 //    }
 
     override fun onListItemDeleted(position: Int) {
-        val deletedPlace = placesViewModel.deletePlace(position)
+//        val deletedPlace = placesViewModel.deletePlace(position)
         placesRecyclerAdapter.notifyItemRemoved(position)
 
 //        // Snackbar is a more updated version of a toast, may also allow an action to take place
