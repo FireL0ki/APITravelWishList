@@ -1,4 +1,4 @@
-package com.example.travelwishlist
+package com.example.apitravelwishlist
 
 import org.junit.Test
 

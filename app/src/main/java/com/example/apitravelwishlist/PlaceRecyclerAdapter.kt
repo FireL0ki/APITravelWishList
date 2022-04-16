@@ -1,8 +1,9 @@
-package com.example.travelwishlist
+package com.example.apitravelwishlist
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -10,7 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 
 // interface is a special kind of a class
 interface OnListItemClickedListener {
-    fun onListItemClicked(place: Place)
+    fun onMapRequestButtonClicked(place: Place)
+    fun onStarredStatusChanged(place: Place, isStarred: Boolean)
 }
 
 
@@ -18,12 +20,6 @@ class PlaceRecyclerAdapter(private val places: List<Place>,
                            private val onListItemClickedListener: OnListItemClickedListener ):
     RecyclerView.Adapter<PlaceRecyclerAdapter.ViewHolder>(){
 
-    // ViewHolder class -- data + layout = view holder (made within adapter class, subclass),
-    // ViewHolder is going to do the work of combining the view and data
-
-        // ViewHolder manages one view - one 'list item' - sets the actual data in the view
-        // nested classes - this is one (class within another class; can't access code/variables within)
-        // inner classes - can access
         inner class ViewHolder(private val view: View): RecyclerView.ViewHolder(view) {
             fun bind(place: Place) {
                 val placeNameTextView: TextView = view.findViewById(R.id.place_name)
@@ -34,16 +30,19 @@ class PlaceRecyclerAdapter(private val places: List<Place>,
                 val placeReasonTextView = view.findViewById<TextView>(R.id.reason_added)
                 placeReasonTextView.text = place.reason
 
-                // set up dateCreated text view, finding it in the view and setting text to the value
-                val dateCreatedOnTextView: TextView = view.findViewById(R.id.date_place_added)
-                val createdOnText = view.context.getString(R.string.created_on, place.formattedDate())
-                dateCreatedOnTextView.text = createdOnText
-
                 // find map icons
                 val mapIcon: ImageView = view.findViewById(R.id.map_icon)
                 mapIcon.setOnClickListener {
-                    onListItemClickedListener.onListItemClicked(place)
+                    onListItemClickedListener.onMapRequestButtonClicked(place)
                 }
+
+                val starCheck = view.findViewById<CheckBox>(R.id.star_check)
+                starCheck.setOnClickListener(null)
+                starCheck.isChecked = place.starred
+                starCheck.setOnClickListener {
+                    onListItemClickedListener.onStarredStatusChanged(place, starCheck.isChecked)
+                }
+
             }
         }
 

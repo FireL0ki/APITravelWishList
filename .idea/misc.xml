@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/muell/AndroidStudioProjects/APITravelWishList/app/src/main/res/drawable/star_check_icons.xml" value="0.259" />
+        <entry key="..\:/Users/muell/AndroidStudioProjects/APITravelWishList/app/src/main/res/layout/activity_main.xml" value="0.23867753623188406" />
+        <entry key="..\:/Users/muell/AndroidStudioProjects/APITravelWishList/app/src/main/res/layout/place_list_item.xml" value="0.5" />
         <entry key="..\:/Users/muell/AndroidStudioProjects/TravelWishlist/app/src/main/res/layout/activity_main.xml" value="0.353713768115942" />
         <entry key="..\:/Users/muell/AndroidStudioProjects/TravelWishlist/app/src/main/res/layout/place_list_item.xml" value="0.33" />
       </map>
