@@ -32,7 +32,7 @@ class PlaceRepository {
                 return places
             }
             else {  // connected to server but server sent an error message
-                Log.e(TAG, "Error connecting to API server ${response.errorBody()}")
+                Log.e(TAG, "Error fetching places from API server ${response.errorBody()}")
                 return listOf()
             }
 
@@ -40,6 +40,21 @@ class PlaceRepository {
             Log.e(TAG, "Error connecting to API server", ex)
             return listOf()
         }
+    }
 
+    suspend fun addPlace(place: Place): Place? {
+        try {
+            val response = placeService.addPlace(place)
+            if (response.isSuccessful) {
+                Log.d(TAG, "Created new place ${place}")
+                return response.body()
+            } else {
+                Log.e(TAG, "Error creating new place ${response.errorBody()}")
+                return null
+            }
+        } catch (ex: Exception) { // can't connect to server - network error
+            Log.e(TAG, "Error connecting to API server", ex)
+            return null
+        }
     }
 }

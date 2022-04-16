@@ -25,11 +25,13 @@ class PlacesViewModel: ViewModel() {
             val places = placeRepository.getAllPlaces()
             allPlaces.postValue(places)
         }
-        // TODO
     }
 
     fun addNewPlace(place: Place) {
-        // TODO
+        viewModelScope.launch {
+            val newPlace = placeRepository.addPlace(place)
+            getPlaces()
+        }
     }
 
     fun deletePlace(place: Place) {
